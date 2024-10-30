@@ -1,0 +1,4 @@
+prodotto_non_trovato=Product not found
+errore_interno=An internal error occurred
+internal_server_error=An internal error occurred. Please try again later.
+bad_request_error=Bad request. Please check your input.

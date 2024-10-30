@@ -1,0 +1,7 @@
+prodotto_non_trovato=Prodotto non trovato
+errore_interno=Si è verificato un errore interno
+prodotto_in_esaurimento=Prodotto in esaurimento scorte
+internal_server_error=Si è verificato un errore interno. Riprova più tardi.
+bad_request_error=Richiesta non valida. Controlla i dati inseriti.
+cliente_creato_ok=Cliente inserito con successo
+cliente_creato_ko=Errore durante l'inserimento

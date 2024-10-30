@@ -3,39 +3,42 @@ package com.aips.mio.utility;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.aips.mio.interfacciaFunz.ControlloInputNumero;
+import com.aips.mio.interfacciaFunz.RitornaValNum;
 
 public class OperazioniSuCampi {
-	
-	@Value("${utility.numeroNoSupportato}")
-	String numeroStrano;
-	
+
+    @Value("${utility.numeroNoSupportato}")
+    private String numeroStrano;
+
     @Value("${utility.stringaNoNumero}")
     private String stringaNoNumero;
-	
-	
+
+    // Metodo per controllare se una stringa contiene solo numeri
     public Boolean controlloStringaSeNum(String in1) {
         ControlloInputNumero stringIsNum = str -> str.matches("\\d+");
-
         return stringIsNum.controlloInputSeNumero(in1);
     }
-    
-    
+
+    // Implementazione del metodo usando la lambda e l'interfaccia funzionale
     @SuppressWarnings("unchecked")
-	public <T extends Number> T ritornaValoreTipoScelto(String in1, String sTipo) {
-        if (controlloStringaSeNum(in1)) {
-            switch (sTipo) {
-                case "Integer": {
-                    return (T) Integer.valueOf(in1);
+    public <T extends Number> T ritornaValoreTipoScelto(String in1, String sTipo) {
+        // Implementazione della conversione usando l'interfaccia funzionale
+        RitornaValNum<String, String, T> conversione = (stringa, tipoNum) -> {
+            if (controlloStringaSeNum(stringa)) {
+                switch (tipoNum) {
+                    case "Integer":
+                        return (T) Integer.valueOf(stringa);
+                    case "Long":
+                        return (T) Long.valueOf(stringa);
+                    default:
+                        throw new IllegalArgumentException(numeroStrano + " " + tipoNum);
                 }
-                case "Long": {
-                    return (T) Long.valueOf(in1);
-                }
-                default: {
-                    throw new IllegalArgumentException(numeroStrano + " " + sTipo);
-                }
+            } else {
+                throw new NumberFormatException(stringaNoNumero + " " + stringa);
             }
-        } else {
-            throw new NumberFormatException(stringaNoNumero + " " + in1);
-        }
+        };
+
+        // Uso dell'interfaccia funzionale per fare la conversione con i parametri in1 e sTipo
+        return conversione.ritornaValoreTipoScelto(in1, sTipo);
     }
 }
