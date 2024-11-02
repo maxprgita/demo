@@ -14,13 +14,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh './mvnw clean install -DskipTests'
+                bat './mvnw clean install -DskipTests'
             }
         }
 
         stage('Test') {
             steps {
-                sh './mvnw test'
+                bat './mvnw test'
             }
         }
 
@@ -45,7 +45,7 @@ pipeline {
 
     post {
         always {
-            sh "docker rmi ${env.DOCKER_IMAGE}:${env.BUILD_ID} || true"
+            bat "docker rmi ${env.DOCKER_IMAGE}:${env.BUILD_ID} || exit 0"
         }
     }
 }
