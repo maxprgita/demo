@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'BOOT_MIX_TECH_UNO'
+        DOCKER_IMAGE = 'boot_mix_tech_uno'
     }
 
     stages {
