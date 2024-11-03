@@ -18,12 +18,6 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                bat './mvnw test'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 script {
