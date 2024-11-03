@@ -18,7 +18,7 @@ RUN mvn package -DskipTests
 FROM openjdk:17-jdk-slim
 
 # Copia l'applicazione compilata dalla fase build
-COPY --from=build /app/target/myapp.jar /app.jar
+COPY --from=build /app/target/demo-0.0.1-SNAPSHOT.jar /app.jar
 
 # Specifica il comando di avvio
 ENTRYPOINT ["java", "-jar", "/app.jar"]
